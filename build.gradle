@@ -1,6 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.7.6'
 	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+	id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
 	id 'java'
 }
 
@@ -20,6 +21,11 @@ dependencies {
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+	//querydsl
+	implementation 'com.querydsl:querydsl-jpa:5.0.0'
+	annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jpa'
+	annotationProcessor 'javax.persistence:javax.persistence-api'
+	annotationProcessor 'javax.annotation:javax.annotation-api'
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
