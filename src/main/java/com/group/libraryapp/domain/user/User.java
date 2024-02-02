@@ -62,6 +62,7 @@ public class User {
             throw new IllegalArgumentException("돈이 부족합니다.");
         }
         this.money -= book.getPrice();
+        book.updateStock(-1);
         UserBuyHistory userBuyHistory = UserBuyHistory.builder()
                 .user(this)
                 .book(book)

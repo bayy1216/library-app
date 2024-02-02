@@ -1,5 +1,6 @@
 package com.group.libraryapp.dto.book.response;
 
+import com.group.libraryapp.domain.book.Book;
 import com.group.libraryapp.type.BookCategory;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,4 +15,16 @@ public class BookInfoDto {
     private BookCategory category;
     private Integer price;
     private Integer stock;
+
+    public static BookInfoDto fromDomain(Book book){
+        return BookInfoDto.builder()
+                .id(book.getId())
+                .name(book.getName())
+                .writer(book.getWriter())
+                .publishedDate(book.getPublishedDate().toString())
+                .category(book.getCategory())
+                .price(book.getPrice())
+                .stock(book.getStock())
+                .build();
+    }
 }

@@ -5,6 +5,7 @@ import com.group.libraryapp.dto.book.request.UpdateBookStockRequest;
 import com.group.libraryapp.dto.book.response.BookInfoDto;
 import com.group.libraryapp.dto.common.response.PagingResponse;
 import com.group.libraryapp.service.book.BookService;
+import com.group.libraryapp.type.BookCategory;
 import com.group.libraryapp.type.GetBookSortType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,10 +20,10 @@ public class BookController {
     @GetMapping("api/v1/book")
     public ResponseEntity<PagingResponse<BookInfoDto>> getBookList(
             @RequestParam("page") int page,
-            @RequestParam("name") String name,
-            @RequestParam("writer") String writer,
-            @RequestParam("category") String category,
-            @RequestParam("sort") GetBookSortType sort
+            @RequestParam(value = "name", required = false) String name,
+            @RequestParam(value = "writer", required = false) String writer,
+            @RequestParam(value = "category", required = false) BookCategory category,
+            @RequestParam(value = "sort", required = false) GetBookSortType sort
     ){
         PagingResponse<BookInfoDto> response = bookService.getBookList(page, name, writer, category, sort);
         return ResponseEntity.ok(response);
