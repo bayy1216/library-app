@@ -25,7 +25,7 @@ public class UserService {
         return UserInfoResponse.fromDomain(user);
     }
 
-    public void createUser(CreateUserRequest request) {
+    public Long createUser(CreateUserRequest request) {
         User user = User.builder()
                 .name(request.getName())
                 .age(request.getAge())
@@ -33,6 +33,7 @@ public class UserService {
                 .password(request.getPassword())
                 .build();
         userRepository.save(user);
+        return user.getId();
     }
 
     public void deleteUser(Long userId) {

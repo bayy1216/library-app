@@ -29,11 +29,15 @@ public class User {
 
     private String password;
 
+    /**
+     * [User] 생성하기 위한 builder.
+     * 처음에 money는 0으로 초기화
+     */
     @Builder
-    public User(String name, Integer age, Integer money, String email, String password) {
+    public User(String name, Integer age, String email, String password) {
         this.name = name;
         this.age = age;
-        this.money = money;
+        this.money = 0;
         this.email = email;
         this.password = password;
     }

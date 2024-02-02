@@ -27,8 +27,8 @@ public class UserController {
 
     @PostMapping("api/v1/user")
     public ResponseEntity<Long> createUser(@RequestBody CreateUserRequest request) {
-        userService.createUser(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(1L);
+        Long id = userService.createUser(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(id);
     }
 
     @DeleteMapping("api/v1/user")
