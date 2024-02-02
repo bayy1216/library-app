@@ -25,7 +25,7 @@ spring:
     activate:
       on-profile: dev
   datasource:
-    url: "jdbc:mysql://localhost/library"
+    url: "jdbc:mysql://localhost/mysql_db"
     username: "root"
     password: "root"
     driver-class-name: com.mysql.cj.jdbc.Driver
