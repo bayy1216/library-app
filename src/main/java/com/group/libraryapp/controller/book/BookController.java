@@ -49,8 +49,8 @@ public class BookController {
 
     @PostMapping("api/v1/book")
     public ResponseEntity<Long> createBook(@RequestBody CreateBookRequest request) {
-        bookService.createBook(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(1L);
+        Long id = bookService.createBook(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(id);
     }
 
     @PutMapping("api/v1/book/{bookId}")

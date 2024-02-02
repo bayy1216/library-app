@@ -2,6 +2,7 @@ package com.group.libraryapp.domain.book.buyhistory;
 
 import com.group.libraryapp.domain.book.Book;
 import com.group.libraryapp.domain.user.User;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -24,4 +25,11 @@ public class UserBuyHistory {
 
     @Column(name = "created_date")
     private LocalDate createdDate;
+
+    @Builder
+    public UserBuyHistory(User user, Book book) {
+        this.user = user;
+        this.book = book;
+        this.createdDate = LocalDate.now();
+    }
 }

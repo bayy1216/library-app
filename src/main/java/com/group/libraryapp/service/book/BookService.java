@@ -11,10 +11,13 @@ import com.group.libraryapp.dto.book.request.UpdateBookStockRequest;
 import com.group.libraryapp.dto.book.response.BookInfoDto;
 import com.group.libraryapp.dto.common.response.PagingResponse;
 import com.group.libraryapp.type.GetBookSortType;
+import com.group.libraryapp.type.LoanType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -37,8 +40,14 @@ public class BookService {
         Book book = bookRepository.findById(bookId).orElseThrow(
                 () -> new IllegalArgumentException("존재하지 않는 책입니다.")
         );
-
-        //TODO: 책 대여 로직
+        List<UserLoanHistory> userLoanHistories = userLoanHistoryRepository.findByUserAndType(user, LoanType.LOANED);
+        if(userLoanHistories.size() >= 10) throw new IllegalArgumentException("대여 가능한 책의 수를 초과하였습니다.");
+        UserLoanHistory userLoanHistory = UserLoanHistory.builder()
+                .user(user)
+                .book(book)
+                .type(LoanType.LOANED)
+                .build();
+        userLoanHistoryRepository.save(userLoanHistory);
     }
 
     public void returnBook(Long loanId, Long userId) {
@@ -48,8 +57,8 @@ public class BookService {
         UserLoanHistory userLoanHistory = userLoanHistoryRepository.findById(loanId).orElseThrow(
                 () -> new IllegalArgumentException("존재하지 않는 대여 기록입니다.")
         );
-
-        //TODO: 책 반납 로직
+        if(userLoanHistory.getType() == LoanType.RETURNED) throw new IllegalArgumentException("이미 반납된 책입니다.");
+        user.returnBook(userLoanHistory);
     }
 
     public void buyBook(Long bookId, Long userId) {
@@ -59,11 +68,10 @@ public class BookService {
         Book book = bookRepository.findById(bookId).orElseThrow(
                 () -> new IllegalArgumentException("존재하지 않는 책입니다.")
         );
-
-        //TODO: 책 구매 로직
+        user.buyBook(book);
     }
 
-    public void createBook(CreateBookRequest request) {
+    public Long createBook(CreateBookRequest request) {
         Book book = Book.builder()
                 .name(request.getName())
                 .writer(request.getWriter())
@@ -74,6 +82,7 @@ public class BookService {
                 .publishedDate(request.getPublishedDate())
                 .build();
         bookRepository.save(book);
+        return book.getId();
     }
 
     public void updateBook(CreateBookRequest request, Long bookId) {
