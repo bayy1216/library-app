@@ -1,5 +1,8 @@
 package com.group.libraryapp.domain.book;
 
+import com.group.libraryapp.domain.book.loanhistory.QUserLoanHistory;
+import com.group.libraryapp.domain.book.loanhistory.UserLoanHistory;
+import com.group.libraryapp.domain.user.QUser;
 import com.group.libraryapp.type.BookCategory;
 import com.group.libraryapp.type.GetBookSortType;
 import com.querydsl.core.types.OrderSpecifier;
@@ -10,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -39,6 +44,22 @@ public class BookQueryRepository {
                 totalCount
         );
     }
+
+    public Page<UserLoanHistory> getLoanHistory(Long userId, int page) {
+        Long totalCount = jpaQueryFactory.from(QUserLoanHistory.userLoanHistory, QUser.user)
+                .select(QUserLoanHistory.userLoanHistory.count())
+                .where(QUserLoanHistory.userLoanHistory.user.eq(QUser.user).and(QUser.user.id.eq(userId)))
+                .fetchOne();
+
+        List<UserLoanHistory> userLoanHistories = jpaQueryFactory
+                .from(QBook.book, QUserLoanHistory.userLoanHistory, QUser.user)
+                .select(QUserLoanHistory.userLoanHistory)
+                .join(QUserLoanHistory.userLoanHistory.book).fetchJoin()
+                .where(QUserLoanHistory.userLoanHistory.user.eq(QUser.user).and(QUser.user.id.eq(userId)))
+                .offset((long) (page) * PAGE_SIZE).limit(PAGE_SIZE).fetch();
+        return new PageImpl<>(userLoanHistories, PageRequest.of(page, PAGE_SIZE), totalCount);
+    }
+
     private OrderSpecifier<?> getOrderSpecifier(GetBookSortType sort) {
         if (sort == null) {
             return QBook.book.id.desc(); // 기본 정렬

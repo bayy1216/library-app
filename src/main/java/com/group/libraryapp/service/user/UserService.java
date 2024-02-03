@@ -1,5 +1,7 @@
 package com.group.libraryapp.service.user;
 
+import com.group.libraryapp.domain.book.BookQueryRepository;
+import com.group.libraryapp.domain.book.loanhistory.UserLoanHistory;
 import com.group.libraryapp.domain.user.User;
 import com.group.libraryapp.domain.user.UserRepository;
 import com.group.libraryapp.dto.common.response.PagingResponse;
@@ -8,14 +10,19 @@ import com.group.libraryapp.dto.user.response.UserBuyHistoryDto;
 import com.group.libraryapp.dto.user.response.UserInfoResponse;
 import com.group.libraryapp.dto.user.response.UserLoanHistoryDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final BookQueryRepository bookQueryRepository;
 
     @Transactional(readOnly = true)
     public UserInfoResponse getUserInfo(Long userId) {
@@ -51,7 +58,12 @@ public class UserService {
     }
     @Transactional(readOnly = true)
     public PagingResponse<UserLoanHistoryDto> pagingLoanHistory(Long userId, int page) {
-        throw new UnsupportedOperationException();
+        Page<UserLoanHistory> loanHistoryPage = bookQueryRepository.getLoanHistory(userId, page);
+        List<UserLoanHistoryDto> userLoanHistoryDtos = loanHistoryPage.getContent().stream().map(
+                UserLoanHistoryDto::fromDomain
+        ).collect(Collectors.toList());
+        return PagingResponse.<UserLoanHistoryDto>builder().totalPage(loanHistoryPage.getTotalPages())
+                .data(userLoanHistoryDtos).build();
     }
     @Transactional(readOnly = true)
     public PagingResponse<UserBuyHistoryDto> pagingBuyHistory(Long userId, int page) {
