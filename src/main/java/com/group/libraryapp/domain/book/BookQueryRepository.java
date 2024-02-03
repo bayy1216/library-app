@@ -47,6 +47,11 @@ public class BookQueryRepository {
         );
     }
 
+    /**
+     * 유저의 대여 이력을 조회합니다.
+     * [user]와 일치하는 [userLoanHistory]를 찾은 뒤에
+     * [book]과 [userLoanHistory]를 fetchJoin하여 N+1 문제를 해결합니다.
+     */
     public Page<UserLoanHistory> getLoanHistory(Long userId, int page) {
         Long totalCount = jpaQueryFactory.from(QUserLoanHistory.userLoanHistory, QUser.user)
                 .select(QUserLoanHistory.userLoanHistory.count())
@@ -62,6 +67,11 @@ public class BookQueryRepository {
         return new PageImpl<>(userLoanHistories, PageRequest.of(page, PAGE_SIZE), totalCount);
     }
 
+    /**
+     * 유저의 구매 이력을 조회합니다.
+     * [user]와 일치하는 [userBuyHistory]를 찾은 뒤에
+     * [book]과 [userBuyHistory]를 fetchJoin하여 N+1 문제를 해결합니다.
+     */
     public Page<UserBuyHistory> getBuyHistory(Long userId, int page) {
         Long totalCount = jpaQueryFactory.from(QUserBuyHistory.userBuyHistory, QUser.user)
                 .select(QUserBuyHistory.userBuyHistory.count())
