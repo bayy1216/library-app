@@ -3,12 +3,14 @@ package com.group.libraryapp.domain.book.buyhistory;
 import com.group.libraryapp.domain.book.Book;
 import com.group.libraryapp.domain.user.User;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Getter
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 public class UserBuyHistory {
     @Id

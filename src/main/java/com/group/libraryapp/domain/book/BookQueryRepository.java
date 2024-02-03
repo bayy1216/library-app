@@ -1,5 +1,7 @@
 package com.group.libraryapp.domain.book;
 
+import com.group.libraryapp.domain.book.buyhistory.QUserBuyHistory;
+import com.group.libraryapp.domain.book.buyhistory.UserBuyHistory;
 import com.group.libraryapp.domain.book.loanhistory.QUserLoanHistory;
 import com.group.libraryapp.domain.book.loanhistory.UserLoanHistory;
 import com.group.libraryapp.domain.user.QUser;
@@ -58,6 +60,21 @@ public class BookQueryRepository {
                 .where(QUserLoanHistory.userLoanHistory.user.eq(QUser.user).and(QUser.user.id.eq(userId)))
                 .offset((long) (page) * PAGE_SIZE).limit(PAGE_SIZE).fetch();
         return new PageImpl<>(userLoanHistories, PageRequest.of(page, PAGE_SIZE), totalCount);
+    }
+
+    public Page<UserBuyHistory> getBuyHistory(Long userId, int page) {
+        Long totalCount = jpaQueryFactory.from(QUserBuyHistory.userBuyHistory, QUser.user)
+                .select(QUserBuyHistory.userBuyHistory.count())
+                .where(QUserBuyHistory.userBuyHistory.user.eq(QUser.user).and(QUser.user.id.eq(userId)))
+                .fetchOne();
+
+        List<UserBuyHistory> userBuyHistories = jpaQueryFactory
+                .from(QBook.book, QUserBuyHistory.userBuyHistory, QUser.user)
+                .select(QUserBuyHistory.userBuyHistory)
+                .join(QUserBuyHistory.userBuyHistory.book).fetchJoin()
+                .where(QUserBuyHistory.userBuyHistory.user.eq(QUser.user).and(QUser.user.id.eq(userId)))
+                .offset((long) (page) * PAGE_SIZE).limit(PAGE_SIZE).fetch();
+        return new PageImpl<>(userBuyHistories, PageRequest.of(page, PAGE_SIZE), totalCount);
     }
 
     private OrderSpecifier<?> getOrderSpecifier(GetBookSortType sort) {

@@ -1,6 +1,7 @@
 package com.group.libraryapp.service.user;
 
 import com.group.libraryapp.domain.book.BookQueryRepository;
+import com.group.libraryapp.domain.book.buyhistory.UserBuyHistory;
 import com.group.libraryapp.domain.book.loanhistory.UserLoanHistory;
 import com.group.libraryapp.domain.user.User;
 import com.group.libraryapp.domain.user.UserRepository;
@@ -67,6 +68,11 @@ public class UserService {
     }
     @Transactional(readOnly = true)
     public PagingResponse<UserBuyHistoryDto> pagingBuyHistory(Long userId, int page) {
-        throw new UnsupportedOperationException();
+        Page<UserBuyHistory> buyHistoryPage = bookQueryRepository.getBuyHistory(userId, page);
+        List<UserBuyHistoryDto> userBuyHistoryDtos = buyHistoryPage.getContent().stream().map(
+                UserBuyHistoryDto::fromDomain
+        ).collect(Collectors.toList());
+        return PagingResponse.<UserBuyHistoryDto>builder().totalPage(buyHistoryPage.getTotalPages())
+                .data(userBuyHistoryDtos).build();
     }
 }
