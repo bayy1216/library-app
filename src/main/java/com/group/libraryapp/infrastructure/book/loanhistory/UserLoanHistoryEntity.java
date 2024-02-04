@@ -33,7 +33,8 @@ public class UserLoanHistoryEntity {
     private LocalDate createdDate;
 
     @Builder
-    public UserLoanHistoryEntity(UserEntity user, BookEntity book, LoanType type, LocalDate createdDate) {
+    public UserLoanHistoryEntity(Long id, UserEntity user, BookEntity book, LoanType type, LocalDate createdDate) {
+        this.id = id;
         this.user = user;
         this.book = book;
         this.type = type;
@@ -51,6 +52,7 @@ public class UserLoanHistoryEntity {
     }
     public static UserLoanHistoryEntity fromDomain(UserLoanHistory userLoanHistory) {
         return UserLoanHistoryEntity.builder()
+                .id(userLoanHistory.getId())
                 .user(UserEntity.fromDomain(userLoanHistory.getUser()))
                 .book(BookEntity.fromDomain(userLoanHistory.getBook()))
                 .type(userLoanHistory.getType())

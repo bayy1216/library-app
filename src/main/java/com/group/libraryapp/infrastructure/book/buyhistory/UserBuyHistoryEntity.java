@@ -30,7 +30,8 @@ public class UserBuyHistoryEntity {
     private LocalDate createdDate;
 
     @Builder
-    public UserBuyHistoryEntity(UserEntity user, BookEntity book) {
+    public UserBuyHistoryEntity(Long id, UserEntity user, BookEntity book) {
+        this.id = id;
         this.user = user;
         this.book = book;
         this.createdDate = LocalDate.now();
@@ -38,6 +39,7 @@ public class UserBuyHistoryEntity {
 
     public static UserBuyHistoryEntity fromDomain(UserBuyHistory userBuyHistory) {
         return UserBuyHistoryEntity.builder()
+                .id(userBuyHistory.getId())
                 .user(UserEntity.fromDomain(userBuyHistory.getUser()))
                 .book(BookEntity.fromDomain(userBuyHistory.getBook()))
                 .build();

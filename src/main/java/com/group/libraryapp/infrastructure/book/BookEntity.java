@@ -37,7 +37,8 @@ public class BookEntity {
 
 
     @Builder
-    public BookEntity(String name, String writer, String description, BookCategory category, Integer price, Integer stock, LocalDate publishedDate) {
+    public BookEntity(Long id, String name, String writer, String description, BookCategory category, Integer price, Integer stock, LocalDate publishedDate) {
+        this.id = id;
         this.name = name;
         this.writer = writer;
         this.description = description;
@@ -49,6 +50,7 @@ public class BookEntity {
 
     public static BookEntity fromDomain(Book book) {
         return BookEntity.builder()
+                .id(book.getId())
                 .name(book.getName())
                 .writer(book.getWriter())
                 .description(book.getDescription())
