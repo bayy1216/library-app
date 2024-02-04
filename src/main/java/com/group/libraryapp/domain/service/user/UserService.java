@@ -3,9 +3,9 @@ package com.group.libraryapp.domain.service.user;
 import com.group.libraryapp.domain.model.book.UserBuyHistory;
 import com.group.libraryapp.domain.model.book.UserLoanHistory;
 import com.group.libraryapp.domain.model.user.User;
+import com.group.libraryapp.domain.model.user.UserCreate;
 import com.group.libraryapp.domain.port.book.BookRepository;
 import com.group.libraryapp.domain.port.user.UserRepository;
-import com.group.libraryapp.presentation.dto.user.request.CreateUserRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -25,13 +25,8 @@ public class UserService {
     }
 
     @Transactional
-    public Long createUser(CreateUserRequest request) {
-        User user = User.builder()
-                .name(request.getName())
-                .age(request.getAge())
-                .email(request.getEmail())
-                .password(request.getPassword())
-                .build();
+    public Long createUser(UserCreate userCreate) {
+        User user = User.from(userCreate);
         user = userRepository.save(user);
         return user.getId();
     }

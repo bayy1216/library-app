@@ -32,6 +32,16 @@ public class User {
         this.password = password;
     }
 
+    public static User from(UserCreate create) {
+        return User.builder()
+                .name(create.getName())
+                .age(create.getAge())
+                .money(0)
+                .email(create.getEmail())
+                .password(create.getPassword())
+                .build();
+    }
+
     public User chargeMoney(Integer money) {
         return User.builder()
                 .id(this.id)

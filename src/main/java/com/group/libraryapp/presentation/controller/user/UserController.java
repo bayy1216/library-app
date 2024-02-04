@@ -33,7 +33,7 @@ public class UserController {
 
     @PostMapping("api/v1/user")
     public ResponseEntity<Long> createUser(@RequestBody CreateUserRequest request) {
-        Long id = userService.createUser(request);
+        Long id = userService.createUser(request.toDomain());
         return ResponseEntity.status(HttpStatus.CREATED).body(id);
     }
 
