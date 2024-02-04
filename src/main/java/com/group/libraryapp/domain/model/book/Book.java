@@ -75,6 +75,7 @@ public class Book {
     }
 
     public Book updateStock(Integer stock) {
+        if(this.stock + stock < 0) throw new IllegalArgumentException("재고가 부족합니다.");
         return Book.builder()
                 .id(this.id)
                 .name(this.name)

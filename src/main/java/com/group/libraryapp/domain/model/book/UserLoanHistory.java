@@ -33,7 +33,7 @@ public class UserLoanHistory {
         return UserLoanHistory.builder()
                 .id(this.id)
                 .user(this.user)
-                .book(this.book)
+                .book(this.book.updateStock(1))
                 .type(LoanType.RETURNED)
                 .createdDate(this.createdDate)
                 .build();

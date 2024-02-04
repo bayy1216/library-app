@@ -40,6 +40,9 @@ public class BookService {
         );
         List<UserLoanHistory> userCurrentLoanHistories = userLoanHistoryRepository.findByUserAndType(user, LoanType.LOANED);
         UserLoanHistory userLoanHistory = user.loanBook(book, userCurrentLoanHistories);
+        book = userLoanHistory.getBook();
+
+        bookRepository.save(book);
         userLoanHistoryRepository.save(userLoanHistory);
     }
 
@@ -49,8 +52,10 @@ public class BookService {
         );
         User user = userLoanHistory.getUser();
         if(!user.getId().equals(userId)) throw new IllegalArgumentException("해당 유저의 대여 기록이 아닙니다.");
-
         userLoanHistory = userLoanHistory.returnBook();
+        Book book = userLoanHistory.getBook();
+
+        bookRepository.save(book);
         userLoanHistoryRepository.save(userLoanHistory);
     }
 
@@ -63,7 +68,10 @@ public class BookService {
         );
         user = user.buyBook(book);
         UserBuyHistory userBuyHistory = UserBuyHistory.from(user, book);
+        book = userBuyHistory.getBook();
+
         userRepository.save(user);
+        bookRepository.save(book);
         userBuyHistoryRepository.save(userBuyHistory);
     }
 

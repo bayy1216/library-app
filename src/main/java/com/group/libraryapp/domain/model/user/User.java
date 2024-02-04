@@ -69,7 +69,7 @@ public class User {
             throw new IllegalArgumentException("대여 가능한 책의 수를 초과하였습니다.");
         }
         return UserLoanHistory.builder()
-                .book(book)
+                .book(book.updateStock(-1))
                 .user(this)
                 .build();
     }

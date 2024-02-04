@@ -27,7 +27,7 @@ public class UserBuyHistory {
     public static UserBuyHistory from(User user, Book book){
         return UserBuyHistory.builder()
                 .user(user)
-                .book(book)
+                .book(book.updateStock(-1))
                 .createdDate(LocalDate.now())
                 .build();
     }
