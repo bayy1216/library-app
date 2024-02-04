@@ -3,7 +3,6 @@ package com.group.libraryapp.domain.user;
 import com.group.libraryapp.domain.book.Book;
 import com.group.libraryapp.domain.book.buyhistory.UserBuyHistory;
 import com.group.libraryapp.domain.book.loanhistory.UserLoanHistory;
-import com.group.libraryapp.type.LoanType;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -62,7 +61,7 @@ public class User {
             throw new IllegalArgumentException("돈이 부족합니다.");
         }
         this.money -= book.getPrice();
-        book.updateStock(-1);
+        book.subtractStock(1);
         UserBuyHistory userBuyHistory = UserBuyHistory.builder()
                 .user(this)
                 .book(book)
@@ -73,7 +72,7 @@ public class User {
 
 
     public void returnBook(UserLoanHistory userLoanHistory) {
-        userLoanHistory.getBook().updateStock(1);
+        userLoanHistory.getBook().addStock(1);
         userLoanHistory.returnBook();
         this.userLoanHistories.remove(userLoanHistory);
     }

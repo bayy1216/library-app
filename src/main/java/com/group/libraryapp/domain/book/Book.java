@@ -55,7 +55,12 @@ public class Book {
         this.publishedDate = publishedDate;
     }
 
-    public void updateStock(Integer stock) {
+    public void addStock(Integer stock) {
+        assert stock > 0;
         this.stock += stock;
+    }
+    public void subtractStock(Integer stock) {
+        assert stock > 0;
+        this.stock -= stock;
     }
 }

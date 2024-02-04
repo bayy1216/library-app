@@ -18,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,7 +55,7 @@ public class BookService {
         if(book.getStock() <= 0) throw new IllegalArgumentException("재고가 없습니다.");
         List<UserLoanHistory> userLoanHistories = userLoanHistoryRepository.findByUserAndType(user, LoanType.LOANED);
         if (userLoanHistories.size() >= 10) throw new IllegalArgumentException("대여 가능한 책의 수를 초과하였습니다.");
-        book.updateStock(-1);
+        book.subtractStock(1);
         UserLoanHistory userLoanHistory = UserLoanHistory.builder()
                 .user(user)
                 .book(book)
@@ -120,6 +119,6 @@ public class BookService {
         Book book = bookRepository.findById(bookId).orElseThrow(
                 () -> new IllegalArgumentException("존재하지 않는 책입니다.")
         );
-        book.updateStock(request.getStock());
+        book.addStock(request.getStock());
     }
 }
