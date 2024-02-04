@@ -52,16 +52,8 @@ public class BookService {
         Book book = bookRepository.findById(bookId).orElseThrow(
                 () -> new IllegalArgumentException("존재하지 않는 책입니다.")
         );
-        if(book.getStock() <= 0) throw new IllegalArgumentException("재고가 없습니다.");
-        List<UserLoanHistory> userLoanHistories = userLoanHistoryRepository.findByUserAndType(user, LoanType.LOANED);
-        if (userLoanHistories.size() >= 10) throw new IllegalArgumentException("대여 가능한 책의 수를 초과하였습니다.");
-        book.subtractStock(1);
-        UserLoanHistory userLoanHistory = UserLoanHistory.builder()
-                .user(user)
-                .book(book)
-                .type(LoanType.LOANED)
-                .build();
-        userLoanHistoryRepository.save(userLoanHistory);
+        List<UserLoanHistory> userCurrentLoanHistories = userLoanHistoryRepository.findByUserAndType(user, LoanType.LOANED);
+        user.loanBook(book, userCurrentLoanHistories);
     }
 
     public void returnBook(Long loanId, Long userId) {
@@ -81,7 +73,6 @@ public class BookService {
         Book book = bookRepository.findById(bookId).orElseThrow(
                 () -> new IllegalArgumentException("존재하지 않는 책입니다.")
         );
-        if(book.getStock() <= 0) throw new IllegalArgumentException("재고가 없습니다.");
         user.buyBook(book);
     }
 

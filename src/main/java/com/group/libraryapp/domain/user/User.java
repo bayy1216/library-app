@@ -58,6 +58,10 @@ public class User {
         this.money += money;
     }
 
+    /**
+     * [User]가 책을 구매하는 행위를 한다.
+     * [money]를 확인하여 구매가능한지 확인한 뒤, 책의 재고를 감소하고, 구매기록을 추가한다.
+     */
     public void buyBook(Book book) {
         if(this.money < book.getPrice()) {
             throw new IllegalArgumentException("돈이 부족합니다.");
@@ -71,6 +75,23 @@ public class User {
         this.userBuyHistories.add(userBuyHistory);
     }
 
+
+    /**
+     * [User]가 책을 대여하는 행위를 한다.
+     * [userCurrentLoanHistories]의 개수를 확인하여 대여가능한지 확인한 뒤, 대출기록을 추가한다.
+     */
+    public void loanBook(Book book, List<UserLoanHistory> userCurrentLoanHistories) {
+        if(userCurrentLoanHistories.size() >= 10) {
+            throw new IllegalArgumentException("대여 가능한 책의 수를 초과하였습니다.");
+        }
+        book.subtractStock(1);
+        UserLoanHistory userLoanHistory = UserLoanHistory.builder()
+                .user(this)
+                .book(book)
+                .type(LoanType.LOANED)
+                .build();
+        this.userLoanHistories.add(userLoanHistory);
+    }
 
 
     /**

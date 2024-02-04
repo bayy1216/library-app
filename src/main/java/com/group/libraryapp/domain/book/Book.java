@@ -59,8 +59,13 @@ public class Book {
         assert stock > 0;
         this.stock += stock;
     }
+
+    /**
+     * 재고를 빼는 메소드. 재고가 부족하면 IllegalArgumentException을 던진다.
+     */
     public void subtractStock(Integer stock) {
         assert stock > 0;
+        if(this.stock < stock) throw new IllegalArgumentException("재고가 부족합니다.");
         this.stock -= stock;
     }
 }
