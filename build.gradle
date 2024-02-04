@@ -23,14 +23,34 @@ dependencies {
 
 	//querydsl
 	implementation 'com.querydsl:querydsl-jpa:5.0.0'
-	annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jpa'
-	annotationProcessor 'javax.persistence:javax.persistence-api'
-	annotationProcessor 'javax.annotation:javax.annotation-api'
+	implementation 'com.querydsl:querydsl-apt:5.0.0'
+	implementation 'com.querydsl:querydsl-core:5.0.0'
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 }
+def querydslDir = "$buildDir/generated/querydsl" //QueryDSL로 생성된 소스가 저장되는 위치
 
+querydsl {
+	jpa = true //JPA 사용여부 설정
+	querydslSourcesDir = querydslDir
+}
+
+sourceSets {
+	main.java.srcDir querydslDir// 빌드시 컴파일이 필요한 소스위치
+}
+
+//QueryDSL 컴파일시 참조할 설정정보
+compileQuerydsl{
+	options.annotationProcessorPath = configurations.querydsl
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+	querydsl.extendsFrom compileClasspath //외부라이브러리 컴파일 경로 상속
+}
 tasks.named('test') {
 	useJUnitPlatform()
 }
