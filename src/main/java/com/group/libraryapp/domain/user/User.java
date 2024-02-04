@@ -3,6 +3,7 @@ package com.group.libraryapp.domain.user;
 import com.group.libraryapp.domain.book.Book;
 import com.group.libraryapp.domain.book.buyhistory.UserBuyHistory;
 import com.group.libraryapp.domain.book.loanhistory.UserLoanHistory;
+import com.group.libraryapp.type.LoanType;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -53,6 +54,7 @@ public class User {
 
 
     public void chargeMoney(Integer money) {
+        assert money > 0;
         this.money += money;
     }
 
@@ -71,9 +73,14 @@ public class User {
 
 
 
+    /**
+     * [User]가 책을 반납하는 행위를 한다.
+     * [userLoanHistory]의 반납여부를 확인한 뒤, 대출기록을 반납처리한다.
+     */
     public void returnBook(UserLoanHistory userLoanHistory) {
-        userLoanHistory.getBook().addStock(1);
-        userLoanHistory.returnBook();
-        this.userLoanHistories.remove(userLoanHistory);
+        if(userLoanHistory.getType() == LoanType.RETURNED) {
+            throw new IllegalArgumentException("이미 반납된 책입니다.");
+        }
+        userLoanHistory.doReturnBook();
     }
 }

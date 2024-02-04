@@ -65,13 +65,12 @@ public class BookService {
     }
 
     public void returnBook(Long loanId, Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(
-                () -> new IllegalArgumentException("존재하지 않는 유저입니다.")
-        );
-        UserLoanHistory userLoanHistory = userLoanHistoryRepository.findById(loanId).orElseThrow(
+        UserLoanHistory userLoanHistory = userLoanHistoryRepository.findByIdWithUserAndBook(loanId).orElseThrow(
                 () -> new IllegalArgumentException("존재하지 않는 대여 기록입니다.")
         );
-        if (userLoanHistory.getType() == LoanType.RETURNED) throw new IllegalArgumentException("이미 반납된 책입니다.");
+        User user = userLoanHistory.getUser();
+        if(!user.getId().equals(userId)) throw new IllegalArgumentException("해당 유저의 대여 기록이 아닙니다.");
+
         user.returnBook(userLoanHistory);
     }
 
