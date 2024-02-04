@@ -2,7 +2,9 @@ package com.group.libraryapp.domain.model.user;
 
 
 import com.group.libraryapp.domain.model.book.Book;
+import com.group.libraryapp.domain.model.book.UserBuyHistory;
 import com.group.libraryapp.domain.model.book.UserLoanHistory;
+import com.group.libraryapp.domain.type.LoanType;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -53,14 +55,21 @@ public class User {
                 .build();
     }
 
-    public User buyBook(Book book) {
-        return User.builder()
+    public UserBuyHistory buyBook(Book book) {
+        if (this.money < book.getPrice()) {
+            throw new IllegalArgumentException("돈이 부족합니다.");
+        }
+        User buyer = User.builder()
                 .id(this.id)
                 .name(this.name)
                 .age(this.age)
                 .money(this.money - book.getPrice())
                 .email(this.email)
                 .password(this.password)
+                .build();
+        return UserBuyHistory.builder()
+                .book(book.updateStock(-1))
+                .user(buyer)
                 .build();
     }
 
@@ -70,6 +79,16 @@ public class User {
         }
         return UserLoanHistory.builder()
                 .book(book.updateStock(-1))
+                .user(this)
+                .build();
+    }
+
+    public UserLoanHistory returnBook(UserLoanHistory userLoanHistory) {
+        return UserLoanHistory.builder()
+                .id(userLoanHistory.getId())
+                .book(userLoanHistory.getBook().updateStock(1))
+                .type(LoanType.RETURNED)
+                .createdDate(userLoanHistory.getCreatedDate())
                 .user(this)
                 .build();
     }

@@ -52,7 +52,8 @@ public class BookService {
         );
         User user = userLoanHistory.getUser();
         if(!user.getId().equals(userId)) throw new IllegalArgumentException("해당 유저의 대여 기록이 아닙니다.");
-        userLoanHistory = userLoanHistory.returnBook();
+
+        userLoanHistory = user.returnBook(userLoanHistory);
         Book book = userLoanHistory.getBook();
 
         bookRepository.save(book);
@@ -66,9 +67,9 @@ public class BookService {
         Book book = bookRepository.findById(bookId).orElseThrow(
                 () -> new IllegalArgumentException("존재하지 않는 책입니다.")
         );
-        user = user.buyBook(book);
-        UserBuyHistory userBuyHistory = UserBuyHistory.from(user, book);
+        UserBuyHistory userBuyHistory = user.buyBook(book);
         book = userBuyHistory.getBook();
+        user = userBuyHistory.getUser();
 
         userRepository.save(user);
         bookRepository.save(book);
