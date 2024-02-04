@@ -1,7 +1,9 @@
-package com.group.libraryapp.infrastructure.user;
+package com.group.libraryapp.infrastructure.adapter.user;
 
 import com.group.libraryapp.domain.model.user.User;
 import com.group.libraryapp.domain.port.user.UserRepository;
+import com.group.libraryapp.infrastructure.user.UserEntity;
+import com.group.libraryapp.infrastructure.user.UserJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

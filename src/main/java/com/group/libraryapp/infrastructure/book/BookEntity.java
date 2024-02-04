@@ -59,28 +59,6 @@ public class BookEntity {
                 .build();
     }
 
-    public void updateBook(String name, String writer, String description, BookCategory category, Integer price, LocalDate publishedDate) {
-        this.name = name;
-        this.writer = writer;
-        this.description = description;
-        this.category = category;
-        this.price = price;
-        this.publishedDate = publishedDate;
-    }
-
-    public void addStock(Integer stock) {
-        assert stock > 0;
-        this.stock += stock;
-    }
-
-    /**
-     * 재고를 빼는 메소드. 재고가 부족하면 IllegalArgumentException을 던진다.
-     */
-    public void subtractStock(Integer stock) {
-        assert stock > 0;
-        if(this.stock < stock) throw new IllegalArgumentException("재고가 부족합니다.");
-        this.stock -= stock;
-    }
 
     public Book toDomain() {
         return Book.builder()

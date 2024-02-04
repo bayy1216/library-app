@@ -1,4 +1,4 @@
-package com.group.libraryapp.domain.port.book.buyhistory;
+package com.group.libraryapp.domain.port.book;
 
 import com.group.libraryapp.domain.model.book.UserBuyHistory;
 

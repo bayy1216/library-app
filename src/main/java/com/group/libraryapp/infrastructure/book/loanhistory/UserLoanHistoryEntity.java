@@ -40,15 +40,6 @@ public class UserLoanHistoryEntity {
         this.createdDate = createdDate;
     }
 
-    /**
-     * 책의 대출기록을 반납처리한다.
-     * [type]을 RETURNED로 변경하고, [book]의 재고를 1 증가시킨다.
-     */
-    public void doReturnBook() {
-        this.type = LoanType.RETURNED;
-        this.book.addStock(1);
-    }
-
     public UserLoanHistory toDomain() {
         return UserLoanHistory.builder()
                 .id(this.id)

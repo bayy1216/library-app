@@ -1,4 +1,4 @@
-package com.group.libraryapp.infrastructure.book;
+package com.group.libraryapp.infrastructure.adapter.book;
 
 import com.group.libraryapp.domain.model.book.Book;
 import com.group.libraryapp.domain.model.book.UserBuyHistory;
@@ -6,6 +6,9 @@ import com.group.libraryapp.domain.model.book.UserLoanHistory;
 import com.group.libraryapp.domain.port.book.BookRepository;
 import com.group.libraryapp.domain.type.BookCategory;
 import com.group.libraryapp.domain.type.GetBookSortType;
+import com.group.libraryapp.infrastructure.book.BookEntity;
+import com.group.libraryapp.infrastructure.book.BookJpaRepository;
+import com.group.libraryapp.infrastructure.book.BookQueryRepository;
 import com.group.libraryapp.infrastructure.book.buyhistory.UserBuyHistoryEntity;
 import com.group.libraryapp.infrastructure.book.loanhistory.UserLoanHistoryEntity;
 import lombok.RequiredArgsConstructor;

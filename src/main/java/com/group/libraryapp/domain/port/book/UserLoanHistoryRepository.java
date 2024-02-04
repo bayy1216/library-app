@@ -1,4 +1,4 @@
-package com.group.libraryapp.domain.port.book.loanhistory;
+package com.group.libraryapp.domain.port.book;
 
 import com.group.libraryapp.domain.model.book.UserLoanHistory;
 import com.group.libraryapp.domain.model.user.User;
