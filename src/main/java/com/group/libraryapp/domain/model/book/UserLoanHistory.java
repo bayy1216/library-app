@@ -25,7 +25,7 @@ public class UserLoanHistory {
         this.user = user;
         this.book = book;
         this.type = type;
-        this.createdDate = createdDate;
+        this.createdDate = LocalDate.now();
     }
 
 
