@@ -1,5 +1,7 @@
 package com.group.libraryapp.presentation.dto.book.request;
 
+import com.group.libraryapp.domain.model.book.BookCreate;
+import com.group.libraryapp.domain.model.book.BookUpdate;
 import com.group.libraryapp.domain.type.BookCategory;
 import lombok.Getter;
 
@@ -13,4 +15,26 @@ public class CreateBookRequest {
     private BookCategory category;
     private Integer price;
     private LocalDate publishedDate;
+
+    public BookCreate toDomain(){
+        return BookCreate.builder()
+                .name(name)
+                .writer(writer)
+                .description(description)
+                .category(category)
+                .price(price)
+                .publishedDate(publishedDate)
+                .build();
+    }
+
+    public BookUpdate toUpdateDomain(){
+        return BookUpdate.builder()
+                .name(name)
+                .writer(writer)
+                .description(description)
+                .category(category)
+                .price(price)
+                .publishedDate(publishedDate)
+                .build();
+    }
 }

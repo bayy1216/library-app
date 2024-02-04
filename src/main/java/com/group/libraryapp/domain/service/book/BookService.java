@@ -1,15 +1,11 @@
 package com.group.libraryapp.domain.service.book;
 
-import com.group.libraryapp.domain.model.book.Book;
-import com.group.libraryapp.domain.model.book.UserBuyHistory;
-import com.group.libraryapp.domain.model.book.UserLoanHistory;
+import com.group.libraryapp.domain.model.book.*;
 import com.group.libraryapp.domain.model.user.User;
 import com.group.libraryapp.domain.port.book.BookRepository;
 import com.group.libraryapp.domain.port.book.buyhistory.UserBuyHistoryRepository;
 import com.group.libraryapp.domain.port.book.loanhistory.UserLoanHistoryRepository;
 import com.group.libraryapp.domain.port.user.UserRepository;
-import com.group.libraryapp.presentation.dto.book.request.CreateBookRequest;
-import com.group.libraryapp.presentation.dto.book.request.UpdateBookStockRequest;
 import com.group.libraryapp.domain.type.BookCategory;
 import com.group.libraryapp.domain.type.GetBookSortType;
 import com.group.libraryapp.domain.type.LoanType;
@@ -66,33 +62,22 @@ public class BookService {
                 () -> new IllegalArgumentException("존재하지 않는 책입니다.")
         );
         user = user.buyBook(book);
-        UserBuyHistory userBuyHistory = UserBuyHistory.builder()
-                .user(user)
-                .book(book)
-                .build();
+        UserBuyHistory userBuyHistory = UserBuyHistory.from(user, book);
         userRepository.save(user);
         userBuyHistoryRepository.save(userBuyHistory);
     }
 
-    public Long createBook(CreateBookRequest request) {
-        Book book = Book.builder()
-                .name(request.getName())
-                .writer(request.getWriter())
-                .description(request.getDescription())
-                .category(request.getCategory())
-                .price(request.getPrice())
-                .stock(0)
-                .publishedDate(request.getPublishedDate())
-                .build();
+    public Long createBook(BookCreate bookCreate) {
+        Book book = Book.from(bookCreate);
         bookRepository.save(book);
         return book.getId();
     }
 
-    public void updateBook(CreateBookRequest request, Long bookId) {
+    public void updateBook(BookUpdate bookUpdate, Long bookId) {
         Book book = bookRepository.findById(bookId).orElseThrow(
                 () -> new IllegalArgumentException("존재하지 않는 책입니다.")
         );
-        book = book.updateBook(request.getName(), request.getWriter(), request.getDescription(), request.getCategory(), request.getPrice(), request.getPublishedDate());
+        book = book.update(bookUpdate);
         bookRepository.save(book);
     }
 
@@ -103,11 +88,11 @@ public class BookService {
         bookRepository.delete(book);
     }
 
-    public void updateBookStock(Long bookId, UpdateBookStockRequest request) {
+    public void updateBookStock(Long bookId, Integer stock) {
         Book book = bookRepository.findById(bookId).orElseThrow(
                 () -> new IllegalArgumentException("존재하지 않는 책입니다.")
         );
-        book = book.addStock(request.getStock());
+        book = book.updateStock(stock);
         bookRepository.save(book);
     }
 }

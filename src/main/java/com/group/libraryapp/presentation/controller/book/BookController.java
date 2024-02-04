@@ -59,13 +59,13 @@ public class BookController {
 
     @PostMapping("api/v1/book")
     public ResponseEntity<Long> createBook(@RequestBody CreateBookRequest request) {
-        Long id = bookService.createBook(request);
+        Long id = bookService.createBook(request.toDomain());
         return ResponseEntity.status(HttpStatus.CREATED).body(id);
     }
 
     @PutMapping("api/v1/book/{bookId}")
     public ResponseEntity<Object> updateBook(@RequestBody CreateBookRequest request, @PathVariable Long bookId) {
-        bookService.updateBook(request, bookId);
+        bookService.updateBook(request.toUpdateDomain(), bookId);
         return ResponseEntity.ok().build();
     }
 
@@ -77,7 +77,7 @@ public class BookController {
 
     @PatchMapping("api/v1/book/{bookId}/stock")
     public ResponseEntity<Object> updateBookStock(@PathVariable Long bookId, @RequestBody UpdateBookStockRequest request) {
-        bookService.updateBookStock(bookId, request);
+        bookService.updateBookStock(bookId, request.getStock());
         return ResponseEntity.ok().build();
     }
 

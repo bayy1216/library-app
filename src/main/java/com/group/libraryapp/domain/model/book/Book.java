@@ -36,6 +36,18 @@ public class Book {
         this.publishedDate = publishedDate;
     }
 
+    public static Book from(BookCreate create){
+        return Book.builder()
+                .name(create.getName())
+                .writer(create.getWriter())
+                .description(create.getDescription())
+                .category(create.getCategory())
+                .price(create.getPrice())
+                .stock(0)
+                .publishedDate(create.getPublishedDate())
+                .build();
+    }
+
     public Book updateBook(String name, String writer, String description, BookCategory category, Integer price, LocalDate publishedDate) {
         return Book.builder()
                 .id(this.id)
@@ -49,7 +61,20 @@ public class Book {
                 .build();
     }
 
-    public Book addStock(Integer stock) {
+    public Book update(BookUpdate update){
+        return Book.builder()
+                .id(this.id)
+                .name(update.getName())
+                .writer(update.getWriter())
+                .description(update.getDescription())
+                .category(update.getCategory())
+                .price(update.getPrice())
+                .stock(this.stock)
+                .publishedDate(update.getPublishedDate())
+                .build();
+    }
+
+    public Book updateStock(Integer stock) {
         return Book.builder()
                 .id(this.id)
                 .name(this.name)

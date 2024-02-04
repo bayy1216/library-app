@@ -23,4 +23,12 @@ public class UserBuyHistory {
         this.book = book;
         this.createdDate = createdDate;
     }
+
+    public static UserBuyHistory from(User user, Book book){
+        return UserBuyHistory.builder()
+                .user(user)
+                .book(book)
+                .createdDate(LocalDate.now())
+                .build();
+    }
 }
