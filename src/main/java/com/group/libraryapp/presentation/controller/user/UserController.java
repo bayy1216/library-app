@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,7 +37,7 @@ public class UserController {
 
     @JwtFilterExclusion
     @PostMapping("api/v1/user")
-    public ResponseEntity<Long> createUser(@RequestBody CreateUserRequest request) {
+    public ResponseEntity<Long> createUser(@Valid @RequestBody CreateUserRequest request) {
         Long id = userService.createUser(request.toDomain());
         return ResponseEntity.status(HttpStatus.CREATED).body(id);
     }
@@ -48,7 +49,7 @@ public class UserController {
     }
 
     @PostMapping("api/v1/user/money")
-    public ResponseEntity<Object> chargeMoney(@Login UserAuth userAuth, @RequestBody ChargeMoneyRequest request) {
+    public ResponseEntity<Object> chargeMoney(@Login UserAuth userAuth, @Valid @RequestBody ChargeMoneyRequest request) {
         userService.chargeMoney(userAuth.getId(), request.getMoney());
         return ResponseEntity.ok().build();
     }
