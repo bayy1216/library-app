@@ -2,10 +2,13 @@ package com.group.libraryapp.presentation.controller.user;
 
 import com.group.libraryapp.core.interceptor.JwtFilterExclusion;
 import com.group.libraryapp.core.interceptor.Login;
+import com.group.libraryapp.core.jwt.JwtToken;
 import com.group.libraryapp.core.jwt.UserAuth;
 import com.group.libraryapp.domain.model.book.UserBuyHistory;
 import com.group.libraryapp.domain.model.book.UserLoanHistory;
 import com.group.libraryapp.domain.model.user.User;
+import com.group.libraryapp.domain.service.auth.AuthService;
+import com.group.libraryapp.presentation.dto.auth.response.TokenResponse;
 import com.group.libraryapp.presentation.dto.response.PagingResponse;
 import com.group.libraryapp.presentation.dto.user.request.ChargeMoneyRequest;
 import com.group.libraryapp.presentation.dto.user.request.CreateUserRequest;
@@ -27,6 +30,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final AuthService authService;
 
     @GetMapping("api/v1/user")
     public ResponseEntity<UserInfoResponse> getUserInfo(@Login UserAuth userAuth) {
@@ -37,9 +41,10 @@ public class UserController {
 
     @JwtFilterExclusion
     @PostMapping("api/v1/user")
-    public ResponseEntity<Long> createUser(@Valid @RequestBody CreateUserRequest request) {
+    public ResponseEntity<TokenResponse> createUser(@Valid @RequestBody CreateUserRequest request) {
         Long id = userService.createUser(request.toDomain());
-        return ResponseEntity.status(HttpStatus.CREATED).body(id);
+        JwtToken token = authService.login(request.getEmail(), request.getPassword());
+        return ResponseEntity.status(HttpStatus.CREATED).body(TokenResponse.of(token));
     }
 
     @DeleteMapping("api/v1/user")
