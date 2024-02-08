@@ -42,9 +42,9 @@ public class BookController {
     }
 
     @PostMapping("api/v1/book/{bookId}/loan")
-    public ResponseEntity<Object> loanBook(@PathVariable Long bookId, @Login UserAuth userAuth) {
-        bookService.loanBook(bookId, userAuth.getId());
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Long> loanBook(@PathVariable Long bookId, @Login UserAuth userAuth) {
+        Long id = bookService.loanBook(bookId, userAuth.getId());
+        return ResponseEntity.ok().body(id);
     }
 
     @PostMapping("api/v1/book/return/{loanId}")
@@ -54,9 +54,9 @@ public class BookController {
     }
 
     @PostMapping("api/v1/book/{bookId}/buy")
-    public ResponseEntity<Object> buyBook(@PathVariable Long bookId, @Login UserAuth userAuth) {
-        bookService.buyBook(bookId, userAuth.getId());
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Long> buyBook(@PathVariable Long bookId, @Login UserAuth userAuth) {
+        Long id = bookService.buyBook(bookId, userAuth.getId());
+        return ResponseEntity.ok().body(id);
     }
 
 
@@ -79,9 +79,9 @@ public class BookController {
     }
 
     @PatchMapping("api/v1/book/{bookId}/stock")
-    public ResponseEntity<Object> updateBookStock(@PathVariable Long bookId, @Valid @RequestBody UpdateBookStockRequest request) {
-        bookService.updateBookStock(bookId, request.getStock());
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Integer> updateBookStock(@PathVariable Long bookId, @Valid @RequestBody UpdateBookStockRequest request) {
+        Integer totalStock = bookService.updateBookStock(bookId, request.getStock());
+        return ResponseEntity.ok().body(totalStock);
     }
 
 }

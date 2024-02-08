@@ -40,12 +40,13 @@ public class UserService {
     }
 
     @Transactional
-    public void chargeMoney(Long userId, Integer money) {
+    public Integer chargeMoney(Long userId, Integer money) {
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new IllegalArgumentException("존재하지 않는 유저입니다.")
         );
         user = user.chargeMoney(money);
         userRepository.save(user);
+        return user.getMoney();
     }
     @Transactional
     public Page<UserLoanHistory> pagingLoanHistory(Long userId, int page) {

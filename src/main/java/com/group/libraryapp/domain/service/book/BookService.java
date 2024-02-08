@@ -31,7 +31,7 @@ public class BookService {
     }
 
 
-    public void loanBook(Long bookId, Long userId) {
+    public Long loanBook(Long bookId, Long userId) {
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new IllegalArgumentException("존재하지 않는 유저입니다.")
         );
@@ -44,6 +44,7 @@ public class BookService {
 
         bookRepository.save(book);
         userLoanHistoryRepository.save(userLoanHistory);
+        return userLoanHistory.getId();
     }
 
     public void returnBook(Long loanId, Long userId) {
@@ -60,7 +61,7 @@ public class BookService {
         userLoanHistoryRepository.save(userLoanHistory);
     }
 
-    public void buyBook(Long bookId, Long userId) {
+    public Long buyBook(Long bookId, Long userId) {
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new IllegalArgumentException("존재하지 않는 유저입니다.")
         );
@@ -74,6 +75,7 @@ public class BookService {
         userRepository.save(user);
         bookRepository.save(book);
         userBuyHistoryRepository.save(userBuyHistory);
+        return userBuyHistory.getId();
     }
 
     public Long createBook(BookCreate bookCreate) {
@@ -97,11 +99,12 @@ public class BookService {
         bookRepository.delete(book);
     }
 
-    public void updateBookStock(Long bookId, Integer stock) {
+    public Integer updateBookStock(Long bookId, Integer stock) {
         Book book = bookRepository.findById(bookId).orElseThrow(
                 () -> new IllegalArgumentException("존재하지 않는 책입니다.")
         );
         book = book.updateStock(stock);
         bookRepository.save(book);
+        return book.getStock();
     }
 }

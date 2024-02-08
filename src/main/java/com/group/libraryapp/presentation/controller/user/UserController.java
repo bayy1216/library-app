@@ -54,9 +54,9 @@ public class UserController {
     }
 
     @PostMapping("api/v1/user/money")
-    public ResponseEntity<Object> chargeMoney(@Login UserAuth userAuth, @Valid @RequestBody ChargeMoneyRequest request) {
-        userService.chargeMoney(userAuth.getId(), request.getMoney());
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Integer> chargeMoney(@Login UserAuth userAuth, @Valid @RequestBody ChargeMoneyRequest request) {
+        Integer money = userService.chargeMoney(userAuth.getId(), request.getMoney());
+        return ResponseEntity.ok().body(money);
     }
 
     @GetMapping("api/v1/user/book/loan")
