@@ -33,6 +33,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	//jwt
 	implementation "io.jsonwebtoken:jjwt:0.9.1"
+	//spring security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 }
 def querydslDir = "$buildDir/generated/querydsl" //QueryDSL로 생성된 소스가 저장되는 위치
 

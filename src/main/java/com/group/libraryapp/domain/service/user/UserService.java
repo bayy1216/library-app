@@ -8,6 +8,7 @@ import com.group.libraryapp.domain.port.book.BookRepository;
 import com.group.libraryapp.domain.port.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
     private final UserRepository userRepository;
     private final BookRepository bookRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public User getUserById(Long userId) {
         return userRepository.findById(userId).orElseThrow(
@@ -26,6 +28,13 @@ public class UserService {
 
     @Transactional
     public Long createUser(UserCreate userCreate) {
+        String bCryptPassword = bCryptPasswordEncoder.encode(userCreate.getPassword());
+        userCreate = userCreate.changePassword(bCryptPassword);
+        userRepository.findByEmail(userCreate.getEmail()).ifPresent(
+                user -> {
+                    throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
+                }
+        );
         User user = User.from(userCreate);
         user = userRepository.save(user);
         return user.getId();
