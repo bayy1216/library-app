@@ -12,6 +12,14 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * [Authorization] 헤더에서 토큰을 추출한뒤 유효성을 검사한다.
+ * <p>
+ * 유효한 토큰이면 [userAuth]를 request에 넣어준다.
+ * <p>
+ * 이후 [JwtLoginResolver]에서 [userAuth]를 컨트롤러의 매개변수로 넣어준다.
+ * @see JwtLoginResolver
+ */
 @Component
 @RequiredArgsConstructor
 public class JwtInterceptor implements HandlerInterceptor {
@@ -34,6 +42,9 @@ public class JwtInterceptor implements HandlerInterceptor {
     }
 
 
+    /**
+     * [JwtFilterExclusion] 어노테이션이 있는지 확인한다.
+     */
     private boolean checkAnnotation(Object handler){
         HandlerMethod handlerMethod=(HandlerMethod) handler;
         return handlerMethod.getMethodAnnotation(JwtFilterExclusion.class) != null;

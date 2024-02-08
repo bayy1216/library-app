@@ -8,6 +8,15 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+/**
+ * [JwtInterceptor]에서 넣어준 [UserAuth]를
+ * 컨트롤러의 메서드의 파라미터로 넣어주는 Resolver.
+ * <p>
+ * 컨트롤러에서 매개변수에 (@Login UserAuth userAuth)로 사용한다
+ * @see JwtInterceptor
+ * @see Login
+ * @see UserAuth
+ */
 @Component
 public class JwtLoginResolver implements HandlerMethodArgumentResolver {
     @Override
