@@ -27,4 +27,9 @@ public class UserRepositoryImpl implements UserRepository {
     public void delete(User user) {
         userJpaRepository.delete(UserEntity.fromDomain(user));
     }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return userJpaRepository.findByEmail(email).map(UserEntity::toDomain);
+    }
 }
