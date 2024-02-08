@@ -1,4 +1,4 @@
-package com.group.libraryapp.config;
+package com.group.libraryapp.core.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
