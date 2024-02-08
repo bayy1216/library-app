@@ -1,5 +1,8 @@
 package com.group.libraryapp.presentation.controller.user;
 
+import com.group.libraryapp.core.interceptor.JwtFilterExclusion;
+import com.group.libraryapp.core.interceptor.Login;
+import com.group.libraryapp.core.jwt.UserAuth;
 import com.group.libraryapp.domain.model.book.UserBuyHistory;
 import com.group.libraryapp.domain.model.book.UserLoanHistory;
 import com.group.libraryapp.domain.model.user.User;
@@ -25,12 +28,13 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("api/v1/user")
-    public ResponseEntity<UserInfoResponse> getUserInfo(@RequestHeader("Authorization") Long userId) {
-        User user = userService.getUserById(userId);
+    public ResponseEntity<UserInfoResponse> getUserInfo(@Login UserAuth userAuth) {
+        User user = userService.getUserById(userAuth.getId());
         UserInfoResponse response = UserInfoResponse.fromDomain(user);
         return ResponseEntity.ok(response);
     }
 
+    @JwtFilterExclusion
     @PostMapping("api/v1/user")
     public ResponseEntity<Long> createUser(@RequestBody CreateUserRequest request) {
         Long id = userService.createUser(request.toDomain());
@@ -38,23 +42,23 @@ public class UserController {
     }
 
     @DeleteMapping("api/v1/user")
-    public ResponseEntity<Object> deleteUser(@RequestHeader("Authorization") Long userId) {
-        userService.deleteUser(userId);
+    public ResponseEntity<Object> deleteUser(@Login UserAuth userAuth) {
+        userService.deleteUser(userAuth.getId());
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("api/v1/user/money")
-    public ResponseEntity<Object> chargeMoney(@RequestHeader("Authorization") Long userId, @RequestBody ChargeMoneyRequest request) {
-        userService.chargeMoney(userId, request.getMoney());
+    public ResponseEntity<Object> chargeMoney(@Login UserAuth userAuth, @RequestBody ChargeMoneyRequest request) {
+        userService.chargeMoney(userAuth.getId(), request.getMoney());
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("api/v1/user/book/loan")
     public ResponseEntity<PagingResponse<UserLoanHistoryDto>> pagingLoanHistory(
-            @RequestHeader("Authorization") Long userId,
+            @Login UserAuth userAuth,
             @RequestParam("page") int page
     ){
-        Page<UserLoanHistory> userLoanHistories = userService.pagingLoanHistory(userId, page);
+        Page<UserLoanHistory> userLoanHistories = userService.pagingLoanHistory(userAuth.getId(), page);
         List<UserLoanHistoryDto> dtos = userLoanHistories.getContent().stream()
                 .map(UserLoanHistoryDto::fromDomain)
                 .collect(Collectors.toList());
@@ -64,10 +68,10 @@ public class UserController {
 
     @GetMapping("api/v1/user/book/buy")
     public ResponseEntity<PagingResponse<UserBuyHistoryDto>> pagingBuyHistory(
-            @RequestHeader("Authorization") Long userId,
+            @Login UserAuth userAuth,
             @RequestParam("page") int page
     ){
-        Page<UserBuyHistory> userBuyHistories = userService.pagingBuyHistory(userId, page);
+        Page<UserBuyHistory> userBuyHistories = userService.pagingBuyHistory(userAuth.getId(), page);
         List<UserBuyHistoryDto> dtos = userBuyHistories.getContent().stream()
                 .map(UserBuyHistoryDto::fromDomain)
                 .collect(Collectors.toList());

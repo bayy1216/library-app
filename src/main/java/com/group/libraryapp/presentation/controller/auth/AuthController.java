@@ -1,5 +1,6 @@
 package com.group.libraryapp.presentation.controller.auth;
 
+import com.group.libraryapp.core.interceptor.JwtFilterExclusion;
 import com.group.libraryapp.core.jwt.JwtToken;
 import com.group.libraryapp.core.jwt.JwtUtils;
 import com.group.libraryapp.domain.service.auth.AuthService;
@@ -23,6 +24,7 @@ public class AuthController {
     private final AuthService authService;
     private final JwtUtils jwtUtils;
 
+    @JwtFilterExclusion
     @GetMapping("api/v1/auth/login")
     public TokenResponse login(@RequestHeader("Authorization") String rawHeader) {
         String emailAndPasswordHeader = jwtUtils.parseHeader(rawHeader, false);
@@ -38,7 +40,7 @@ public class AuthController {
         return TokenResponse.of(jwtToken);
     }
 
-
+    @JwtFilterExclusion
     @PostMapping("api/v1/auth/reissue")
     public AccessTokenResponse reissue(@RequestHeader("Authorization") String refreshRawToken) {
         String refreshToken = jwtUtils.parseHeader(refreshRawToken, true);

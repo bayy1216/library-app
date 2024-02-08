@@ -1,5 +1,7 @@
 package com.group.libraryapp.presentation.controller.book;
 
+import com.group.libraryapp.core.interceptor.Login;
+import com.group.libraryapp.core.jwt.UserAuth;
 import com.group.libraryapp.domain.model.book.Book;
 import com.group.libraryapp.presentation.dto.book.request.CreateBookRequest;
 import com.group.libraryapp.presentation.dto.book.request.UpdateBookStockRequest;
@@ -39,20 +41,20 @@ public class BookController {
     }
 
     @PostMapping("api/v1/book/{bookId}/loan")
-    public ResponseEntity<Object> loanBook(@PathVariable Long bookId, @RequestHeader("Authorization") Long userId) {
-        bookService.loanBook(bookId, userId);
+    public ResponseEntity<Object> loanBook(@PathVariable Long bookId, @Login UserAuth userAuth) {
+        bookService.loanBook(bookId, userAuth.getId());
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("api/v1/book/return/{loanId}")
-    public ResponseEntity<Object> returnBook(@PathVariable Long loanId, @RequestHeader("Authorization") Long userId) {
-        bookService.returnBook(loanId, userId);
+    public ResponseEntity<Object> returnBook(@PathVariable Long loanId, @Login UserAuth userAuth) {
+        bookService.returnBook(loanId, userAuth.getId());
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("api/v1/book/{bookId}/buy")
-    public ResponseEntity<Object> buyBook(@PathVariable Long bookId, @RequestHeader("Authorization") Long userId) {
-        bookService.buyBook(bookId, userId);
+    public ResponseEntity<Object> buyBook(@PathVariable Long bookId, @Login UserAuth userAuth) {
+        bookService.buyBook(bookId, userAuth.getId());
         return ResponseEntity.ok().build();
     }
 
