@@ -80,7 +80,7 @@ public class BookService {
 
     public Long createBook(BookCreate bookCreate) {
         Book book = Book.from(bookCreate);
-        bookRepository.save(book);
+        book = bookRepository.save(book);
         return book.getId();
     }
 
