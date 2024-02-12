@@ -1,5 +1,6 @@
 package com.group.libraryapp.domain.service.auth;
 
+import com.group.libraryapp.core.exception.ResourceNotFoundException;
 import com.group.libraryapp.core.jwt.JwtToken;
 import com.group.libraryapp.core.jwt.JwtUtils;
 import com.group.libraryapp.core.jwt.UserAuth;
@@ -21,7 +22,7 @@ public class AuthService {
 
     public JwtToken login(String email, String password) {
         User user = userRepository.findByEmail(email).orElseThrow(
-                () -> new IllegalArgumentException("존재하지 않는 유저입니다.")
+                () -> new ResourceNotFoundException("User", email)
         );
         boolean isMatches = bCryptPasswordEncoder.matches(password, user.getPassword());
         if(!isMatches) {

@@ -1,5 +1,6 @@
 package com.group.libraryapp.domain.service.user;
 
+import com.group.libraryapp.core.exception.ResourceNotFoundException;
 import com.group.libraryapp.domain.model.book.UserBuyHistory;
 import com.group.libraryapp.domain.model.book.UserLoanHistory;
 import com.group.libraryapp.domain.model.user.User;
@@ -22,7 +23,7 @@ public class UserService {
 
     public User getUserById(Long userId) {
         return userRepository.findById(userId).orElseThrow(
-                () -> new IllegalArgumentException("존재하지 않는 유저입니다.")
+                () -> new ResourceNotFoundException("User", userId)
         );
     }
 
@@ -43,7 +44,7 @@ public class UserService {
     @Transactional
     public void deleteUser(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(
-                () -> new IllegalArgumentException("존재하지 않는 유저입니다.")
+                () -> new ResourceNotFoundException("User", userId)
         );
         userRepository.delete(user);
     }
@@ -51,7 +52,7 @@ public class UserService {
     @Transactional
     public Integer chargeMoney(Long userId, Integer money) {
         User user = userRepository.findById(userId).orElseThrow(
-                () -> new IllegalArgumentException("존재하지 않는 유저입니다.")
+                () -> new ResourceNotFoundException("User", userId)
         );
         user = user.chargeMoney(money);
         userRepository.save(user);
