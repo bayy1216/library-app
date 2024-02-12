@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 @RestControllerAdvice
-public class ApiExceptionHandler {
+public class ApiExceptionControllerAdvice {
 
 
     @ExceptionHandler
