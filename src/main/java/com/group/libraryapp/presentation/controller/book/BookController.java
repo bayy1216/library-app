@@ -1,5 +1,6 @@
 package com.group.libraryapp.presentation.controller.book;
 
+import com.group.libraryapp.core.interceptor.Admin;
 import com.group.libraryapp.core.interceptor.Login;
 import com.group.libraryapp.core.jwt.UserAuth;
 import com.group.libraryapp.domain.model.book.Book;
@@ -59,25 +60,27 @@ public class BookController {
         return ResponseEntity.ok().body(id);
     }
 
-
+    @Admin
     @PostMapping("api/v1/book")
     public ResponseEntity<Long> createBook(@Valid @RequestBody CreateBookRequest request) {
         Long id = bookService.createBook(request.toDomain());
         return ResponseEntity.status(HttpStatus.CREATED).body(id);
     }
-
+    @Admin
     @PutMapping("api/v1/book/{bookId}")
     public ResponseEntity<Object> updateBook(@Valid @RequestBody CreateBookRequest request, @PathVariable Long bookId) {
         bookService.updateBook(request.toUpdateDomain(), bookId);
         return ResponseEntity.ok().build();
     }
 
+    @Admin
     @DeleteMapping("api/v1/book/{bookId}")
     public ResponseEntity<Object> deleteBook(@PathVariable Long bookId) {
         bookService.deleteBook(bookId);
         return ResponseEntity.ok().build();
     }
 
+    @Admin
     @PatchMapping("api/v1/book/{bookId}/stock")
     public ResponseEntity<Integer> updateBookStock(@PathVariable Long bookId, @Valid @RequestBody UpdateBookStockRequest request) {
         Integer totalStock = bookService.updateBookStock(bookId, request.getStock());
