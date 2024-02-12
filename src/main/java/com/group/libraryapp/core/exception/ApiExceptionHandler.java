@@ -59,5 +59,14 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler
+    public ResponseEntity<ErrorResponse> exceptionHandler(ResourceNotFoundException e) {
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .error("Exception")
+                .message(e.getMessage())
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
 
 }
