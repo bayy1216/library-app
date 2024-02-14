@@ -1,4 +1,26 @@
 spring:
+  datasource:
+    url: "jdbc:h2:mem:library;MODE=MYSQL;NON_KEYWORDS=USER"
+    username: "sa"
+    password: ""
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+jwt:
+  secret: "b9ba6041-9927-4bf8-9bfa-fdaf95ae5a9b"
+---
+spring:
   config:
     activate:
       on-profile: local
