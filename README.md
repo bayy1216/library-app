@@ -8,3 +8,7 @@
 
 ## API 명세서
 [Git Book](https://ajang.gitbook.io/ajang/)
+
+## Architecture
+![image](https://github.com/bayy1216/library-app/assets/78216059/623d5edc-cfa1-41ca-91db-f87c751da19b)
+![image](https://github.com/bayy1216/library-app/assets/78216059/7064ba68-d633-43fc-9294-e061d4432306)
