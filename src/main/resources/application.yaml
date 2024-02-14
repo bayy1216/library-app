@@ -46,8 +46,8 @@ spring:
 
 jwt:
   secret: "b9ba6041-9927-4bf8-9bfa-fdaf95ae5a9b"
-  access-token-expire-time: 1800000
-  refresh-token-expire-time: 3600000
+  access-token-expire-time: 900000 # 15 minutes
+  refresh-token-expire-time: 1800000 # 30 minutes
 ---
 spring:
   config:
@@ -64,12 +64,12 @@ spring:
       ddl-auto: none
     properties:
       hibernate:
-        format_sql: true
-        show_sql: true
+        format_sql: false
+        show_sql: false
         dialect: org.hibernate.dialect.MySQL8Dialect
 
 
 jwt:
   secret: "b9ba6041-9927-4bf8-9bfa-fdaf95ae5a9b"
-  access-token-expire-time: 1800000
-  refresh-token-expire-time: 2592000000
+  access-token-expire-time: 1800000 # 30 minutes
+  refresh-token-expire-time: 2592000000 # 30 days
