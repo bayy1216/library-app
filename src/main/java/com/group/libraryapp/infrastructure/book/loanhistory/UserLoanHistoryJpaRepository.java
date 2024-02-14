@@ -1,8 +1,7 @@
 package com.group.libraryapp.infrastructure.book.loanhistory;
 
-import com.group.libraryapp.infrastructure.book.loanhistory.UserLoanHistoryEntity;
 import com.group.libraryapp.infrastructure.user.UserEntity;
-import com.group.libraryapp.domain.type.LoanType;
+import com.group.libraryapp.core.type.LoanType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

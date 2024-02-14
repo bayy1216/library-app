@@ -1,7 +1,7 @@
 package com.group.libraryapp.infrastructure.book;
 
-import com.group.libraryapp.domain.type.BookCategory;
-import com.group.libraryapp.domain.type.GetBookSortType;
+import com.group.libraryapp.core.type.BookCategory;
+import com.group.libraryapp.core.type.GetBookSortType;
 import com.group.libraryapp.infrastructure.book.buyhistory.QUserBuyHistoryEntity;
 import com.group.libraryapp.infrastructure.book.buyhistory.UserBuyHistoryEntity;
 import com.group.libraryapp.infrastructure.book.loanhistory.QUserLoanHistoryEntity;

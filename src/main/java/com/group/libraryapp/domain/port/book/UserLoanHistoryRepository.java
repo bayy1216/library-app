@@ -2,8 +2,7 @@ package com.group.libraryapp.domain.port.book;
 
 import com.group.libraryapp.domain.model.book.UserLoanHistory;
 import com.group.libraryapp.domain.model.user.User;
-import com.group.libraryapp.domain.type.LoanType;
-import org.springframework.stereotype.Repository;
+import com.group.libraryapp.core.type.LoanType;
 
 import java.util.List;
 import java.util.Optional;

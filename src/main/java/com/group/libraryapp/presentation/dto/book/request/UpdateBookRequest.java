@@ -1,6 +1,6 @@
 package com.group.libraryapp.presentation.dto.book.request;
 
-import com.group.libraryapp.domain.type.BookCategory;
+import com.group.libraryapp.core.type.BookCategory;
 import lombok.Getter;
 
 import javax.validation.constraints.NotBlank;

@@ -1,4 +1,4 @@
-package com.group.libraryapp.core.exception;
+package com.group.libraryapp.presentation.error;
 
 import lombok.Builder;
 import lombok.Getter;

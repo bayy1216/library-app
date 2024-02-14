@@ -3,7 +3,7 @@ package com.group.libraryapp.infrastructure.adapter.book;
 import com.group.libraryapp.domain.model.book.UserLoanHistory;
 import com.group.libraryapp.domain.model.user.User;
 import com.group.libraryapp.domain.port.book.UserLoanHistoryRepository;
-import com.group.libraryapp.domain.type.LoanType;
+import com.group.libraryapp.core.type.LoanType;
 import com.group.libraryapp.infrastructure.book.loanhistory.UserLoanHistoryEntity;
 import com.group.libraryapp.infrastructure.book.loanhistory.UserLoanHistoryJpaRepository;
 import com.group.libraryapp.infrastructure.user.UserEntity;

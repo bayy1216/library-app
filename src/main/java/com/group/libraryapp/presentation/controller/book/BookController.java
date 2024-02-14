@@ -1,7 +1,7 @@
 package com.group.libraryapp.presentation.controller.book;
 
-import com.group.libraryapp.core.interceptor.Admin;
-import com.group.libraryapp.core.interceptor.Login;
+import com.group.libraryapp.presentation.interceptor.annotation.Admin;
+import com.group.libraryapp.presentation.interceptor.annotation.Login;
 import com.group.libraryapp.core.jwt.UserAuth;
 import com.group.libraryapp.domain.model.book.Book;
 import com.group.libraryapp.presentation.dto.book.request.CreateBookRequest;
@@ -9,8 +9,8 @@ import com.group.libraryapp.presentation.dto.book.request.UpdateBookStockRequest
 import com.group.libraryapp.presentation.dto.book.response.BookInfoDto;
 import com.group.libraryapp.presentation.dto.response.PagingResponse;
 import com.group.libraryapp.domain.service.book.BookService;
-import com.group.libraryapp.domain.type.BookCategory;
-import com.group.libraryapp.domain.type.GetBookSortType;
+import com.group.libraryapp.core.type.BookCategory;
+import com.group.libraryapp.core.type.GetBookSortType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

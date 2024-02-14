@@ -1,4 +1,6 @@
-package com.group.libraryapp.core.interceptor;
+package com.group.libraryapp.presentation.interceptor.annotation;
+
+import com.group.libraryapp.presentation.interceptor.JwtInterceptor;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -6,10 +6,8 @@ import com.group.libraryapp.core.jwt.JwtUtils;
 import com.group.libraryapp.core.jwt.UserAuth;
 import com.group.libraryapp.domain.model.user.User;
 import com.group.libraryapp.domain.port.user.UserRepository;
-import com.group.libraryapp.domain.type.UserType;
-import io.jsonwebtoken.JwtException;
+import com.group.libraryapp.core.type.UserType;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

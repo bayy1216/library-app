@@ -1,9 +1,6 @@
 package com.group.libraryapp.infrastructure.user;
 
 import com.group.libraryapp.domain.model.user.User;
-import com.group.libraryapp.domain.type.LoanType;
-import com.group.libraryapp.infrastructure.book.BookEntity;
-import com.group.libraryapp.infrastructure.book.buyhistory.UserBuyHistoryEntity;
 import com.group.libraryapp.infrastructure.book.loanhistory.UserLoanHistoryEntity;
 import lombok.AccessLevel;
 import lombok.Builder;

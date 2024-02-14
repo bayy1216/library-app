@@ -4,7 +4,7 @@ package com.group.libraryapp.domain.model.user;
 import com.group.libraryapp.domain.model.book.Book;
 import com.group.libraryapp.domain.model.book.UserBuyHistory;
 import com.group.libraryapp.domain.model.book.UserLoanHistory;
-import com.group.libraryapp.domain.type.LoanType;
+import com.group.libraryapp.core.type.LoanType;
 import lombok.Builder;
 import lombok.Getter;
 

@@ -2,7 +2,7 @@ package com.group.libraryapp.presentation.dto.user.response;
 
 import com.group.libraryapp.domain.model.book.UserLoanHistory;
 import com.group.libraryapp.presentation.dto.book.response.BookSummaryDto;
-import com.group.libraryapp.domain.type.LoanType;
+import com.group.libraryapp.core.type.LoanType;
 import lombok.Builder;
 import lombok.Getter;
 

@@ -1,7 +1,7 @@
-package com.group.libraryapp.core.config;
+package com.group.libraryapp.presentation.config;
 
-import com.group.libraryapp.core.interceptor.JwtInterceptor;
-import com.group.libraryapp.core.interceptor.JwtLoginResolver;
+import com.group.libraryapp.presentation.interceptor.JwtInterceptor;
+import com.group.libraryapp.presentation.interceptor.JwtLoginResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;

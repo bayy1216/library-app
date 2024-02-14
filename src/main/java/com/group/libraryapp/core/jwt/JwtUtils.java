@@ -1,6 +1,6 @@
 package com.group.libraryapp.core.jwt;
 
-import com.group.libraryapp.domain.type.UserType;
+import com.group.libraryapp.core.type.UserType;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;

@@ -1,7 +1,7 @@
 package com.group.libraryapp.presentation.controller.user;
 
-import com.group.libraryapp.core.interceptor.JwtFilterExclusion;
-import com.group.libraryapp.core.interceptor.Login;
+import com.group.libraryapp.presentation.interceptor.annotation.JwtFilterExclusion;
+import com.group.libraryapp.presentation.interceptor.annotation.Login;
 import com.group.libraryapp.core.jwt.JwtToken;
 import com.group.libraryapp.core.jwt.UserAuth;
 import com.group.libraryapp.domain.model.book.UserBuyHistory;

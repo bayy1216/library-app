@@ -1,7 +1,7 @@
 package com.group.libraryapp.domain.model.book;
 
 import com.group.libraryapp.domain.model.user.User;
-import com.group.libraryapp.domain.type.LoanType;
+import com.group.libraryapp.core.type.LoanType;
 import lombok.Builder;
 import lombok.Getter;
 

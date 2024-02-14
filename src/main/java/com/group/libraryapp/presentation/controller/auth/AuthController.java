@@ -1,6 +1,6 @@
 package com.group.libraryapp.presentation.controller.auth;
 
-import com.group.libraryapp.core.interceptor.JwtFilterExclusion;
+import com.group.libraryapp.presentation.interceptor.annotation.JwtFilterExclusion;
 import com.group.libraryapp.core.jwt.JwtToken;
 import com.group.libraryapp.core.jwt.JwtUtils;
 import com.group.libraryapp.domain.service.auth.AuthService;
@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Arrays;
 
 @RestController
 @Slf4j

@@ -3,10 +3,9 @@ package com.group.libraryapp.domain.port.book;
 import com.group.libraryapp.domain.model.book.Book;
 import com.group.libraryapp.domain.model.book.UserBuyHistory;
 import com.group.libraryapp.domain.model.book.UserLoanHistory;
-import com.group.libraryapp.domain.type.BookCategory;
-import com.group.libraryapp.domain.type.GetBookSortType;
+import com.group.libraryapp.core.type.BookCategory;
+import com.group.libraryapp.core.type.GetBookSortType;
 import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 

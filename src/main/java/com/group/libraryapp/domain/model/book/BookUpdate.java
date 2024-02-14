@@ -1,6 +1,6 @@
 package com.group.libraryapp.domain.model.book;
 
-import com.group.libraryapp.domain.type.BookCategory;
+import com.group.libraryapp.core.type.BookCategory;
 import lombok.Builder;
 import lombok.Getter;
 

@@ -1,15 +1,15 @@
-package com.group.libraryapp.core.interceptor;
+package com.group.libraryapp.presentation.interceptor;
 
 import com.group.libraryapp.core.jwt.JwtUtils;
 import com.group.libraryapp.core.jwt.UserAuth;
-import com.group.libraryapp.domain.type.UserType;
+import com.group.libraryapp.core.type.UserType;
+import com.group.libraryapp.presentation.interceptor.annotation.Admin;
+import com.group.libraryapp.presentation.interceptor.annotation.JwtFilterExclusion;
 import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

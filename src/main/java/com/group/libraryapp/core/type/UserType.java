@@ -1,4 +1,4 @@
-package com.group.libraryapp.domain.type;
+package com.group.libraryapp.core.type;
 
 public enum UserType {
     ADMIN, USER

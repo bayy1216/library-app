@@ -1,5 +1,6 @@
-package com.group.libraryapp.core.exception;
+package com.group.libraryapp.presentation.error;
 
+import com.group.libraryapp.core.exception.ResourceNotFoundException;
 import io.jsonwebtoken.JwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
