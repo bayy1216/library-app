@@ -1,4 +1,4 @@
-spring:
+spring: # test profile
   datasource:
     url: "jdbc:h2:mem:library;MODE=MYSQL;NON_KEYWORDS=USER"
     username: "sa"
@@ -19,6 +19,8 @@ spring:
 
 jwt:
   secret: "b9ba6041-9927-4bf8-9bfa-fdaf95ae5a9b"
+  access-token-expire-time: 1800000
+  refresh-token-expire-time: 2592000000
 ---
 spring:
   config:
@@ -44,6 +46,8 @@ spring:
 
 jwt:
   secret: "b9ba6041-9927-4bf8-9bfa-fdaf95ae5a9b"
+  access-token-expire-time: 1800000
+  refresh-token-expire-time: 3600000
 ---
 spring:
   config:
@@ -67,3 +71,5 @@ spring:
 
 jwt:
   secret: "b9ba6041-9927-4bf8-9bfa-fdaf95ae5a9b"
+  access-token-expire-time: 1800000
+  refresh-token-expire-time: 2592000000

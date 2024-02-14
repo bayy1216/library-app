@@ -17,9 +17,10 @@ public class JwtUtils {
     @Value("${jwt.secret}")
     private String secret;
 
-
-    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000L * 60 * 30;  // 30분
-    private static final long REFRESH_TOKEN_EXPIRE_TIME = 1000L * 60 * 60 * 24 * 30;  // 30일
+    @Value("${jwt.access-token-expire-time}")
+    private long ACCESS_TOKEN_EXPIRE_TIME;
+    @Value("${jwt.refresh-token-expire-time}")
+    private long REFRESH_TOKEN_EXPIRE_TIME;
     private static final String ID = "id";
     private static final String TYPE = "type";
     private static final String IS_ACCESS_TOKEN = "isAccessToken";
