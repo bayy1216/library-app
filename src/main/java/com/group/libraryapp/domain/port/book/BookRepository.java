@@ -12,9 +12,8 @@ import java.util.Optional;
 public interface BookRepository {
     Optional<Book> findById(Long bookId);
 
-    Page<UserBuyHistory> getBuyHistory(Long userId, int page);
 
-    Page<UserLoanHistory> getLoanHistory(Long userId, int page);
+
 
     void delete(Book book);
 

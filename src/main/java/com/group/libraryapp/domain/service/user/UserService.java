@@ -6,6 +6,8 @@ import com.group.libraryapp.domain.model.book.UserLoanHistory;
 import com.group.libraryapp.domain.model.user.User;
 import com.group.libraryapp.domain.model.user.UserCreate;
 import com.group.libraryapp.domain.port.book.BookRepository;
+import com.group.libraryapp.domain.port.book.UserBuyHistoryRepository;
+import com.group.libraryapp.domain.port.book.UserLoanHistoryRepository;
 import com.group.libraryapp.domain.port.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -19,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
     private final UserRepository userRepository;
     private final BookRepository bookRepository;
+    private final UserBuyHistoryRepository userBuyHistoryRepository;
+    private final UserLoanHistoryRepository userLoanHistoryRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public User getUserById(Long userId) {
@@ -60,11 +64,11 @@ public class UserService {
     }
     @Transactional
     public Page<UserLoanHistory> pagingLoanHistory(Long userId, int page) {
-        return bookRepository.getLoanHistory(userId, page);
+        return userLoanHistoryRepository.getLoanHistory(userId, page);
     }
 
     @Transactional
     public Page<UserBuyHistory> pagingBuyHistory(Long userId, int page) {
-        return bookRepository.getBuyHistory(userId, page);
+        return userBuyHistoryRepository.getBuyHistory(userId, page);
     }
 }

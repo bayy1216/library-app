@@ -29,25 +29,9 @@ public class BookRepositoryImpl implements BookRepository {
         return bookJpaRepository.findById(bookId).map(BookEntity::toDomain);
     }
 
-    @Override
-    public Page<UserBuyHistory> getBuyHistory(Long userId, int page) {
-        Page<UserBuyHistoryEntity> userBuyHistoryEntities = bookQueryRepository.getBuyHistory(userId, page);
-        return new PageImpl<>(
-                userBuyHistoryEntities.getContent().stream().map(UserBuyHistoryEntity::toDomain).collect(Collectors.toList()),
-                userBuyHistoryEntities.getPageable(),
-                userBuyHistoryEntities.getTotalElements()
-        );
-    }
 
-    @Override
-    public Page<UserLoanHistory> getLoanHistory(Long userId, int page) {
-        Page<UserLoanHistoryEntity> userLoanHistoryEntities = bookQueryRepository.getLoanHistory(userId, page);
-        return new PageImpl<>(
-                userLoanHistoryEntities.getContent().stream().map(UserLoanHistoryEntity::toDomain).collect(Collectors.toList()),
-                userLoanHistoryEntities.getPageable(),
-                userLoanHistoryEntities.getTotalElements()
-        );
-    }
+
+
 
     @Override
     public void delete(Book book) {
