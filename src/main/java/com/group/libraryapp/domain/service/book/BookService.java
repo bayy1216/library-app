@@ -10,6 +10,7 @@ import com.group.libraryapp.domain.port.user.UserRepository;
 import com.group.libraryapp.core.type.BookCategory;
 import com.group.libraryapp.core.type.GetBookSortType;
 import com.group.libraryapp.core.type.LoanType;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Builder
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -44,7 +46,7 @@ public class BookService {
         book = userLoanHistory.getBook();
 
         bookRepository.save(book);
-        userLoanHistoryRepository.save(userLoanHistory);
+        userLoanHistory = userLoanHistoryRepository.save(userLoanHistory);
         return userLoanHistory.getId();
     }
 
@@ -75,7 +77,7 @@ public class BookService {
 
         userRepository.save(user);
         bookRepository.save(book);
-        userBuyHistoryRepository.save(userBuyHistory);
+        userBuyHistory = userBuyHistoryRepository.save(userBuyHistory);
         return userBuyHistory.getId();
     }
 
