@@ -1,6 +1,8 @@
 # Library App
 책 구매와 책 대여할 수 있는 도서관 + 인터넷 서점 웹 서비스의 백엔드 API 서버를 개발
 
+도커와 깃허브 액션을 이용한 CI 적용
+
 ## TechStack
 - springBoot
 - jpa
