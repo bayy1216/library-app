@@ -29,7 +29,7 @@ jobs:
         # GitHub Secret에서 Docker Hub 액세스 토큰을 가져옵니다.
 
     - name: Build and Push
-      uses: docker/build-push-action@v5
+      uses: docker/build-push-action@v5 #
       with:
         context: ./
         # Dockerfile이 있는 위치입니다.
