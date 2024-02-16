@@ -1,15 +1,23 @@
+version: '3'
 services:
-  mysql:
-    container_name: mysql-docker
-    image: mysql
+  library-mysql:
+    build:
+      context: .
+      dockerfile: Dockerfile-mysql
+    image: library-mysql:0.0.1-compose
     restart: always
     volumes:
       - ./mysql-data:/var/lib/mysql
-    ports:
-      - "3306:3306"
+  library-backend:
+    build: .
+    image: library-backend:0.0.1-compose
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: mysql_db
-      MYSQL_USER: user
-      MYSQL_PASSWORD: pwd
-    platform: linux/amd64
+      - DB_URL=library-mysql
+      - DB_PORT=3306
+      - DB_NAME=mysql_db
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+    depends_on:
+      - library-mysql
+    ports:
+      - "8080:8080"

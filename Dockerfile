@@ -22,4 +22,4 @@ RUN ./gradlew --no-daemon clean build
 FROM openjdk:11
 COPY --from=builder /app/build/libs/*.jar /app/app.jar  
 ENTRYPOINT ["java"]  
-CMD ["-jar","/app/app.jar", "--spring.profiles.active=local"]
+CMD ["-jar","/app/app.jar", "--spring.profiles.active=prod"]
