@@ -6,6 +6,10 @@
 - jpa
 - mysql
 
+## CI/CD
+- github action
+- docker
+
 ## API 명세서
 [Git Book](https://ajang.gitbook.io/ajang/)
 
