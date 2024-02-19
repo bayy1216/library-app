@@ -1,4 +1,4 @@
-package com.group.libraryapp.presentation.dto.response;
+package com.group.libraryapp.presentation.controller.common.response;
 
 import lombok.Getter;
 import org.springframework.data.domain.Page;

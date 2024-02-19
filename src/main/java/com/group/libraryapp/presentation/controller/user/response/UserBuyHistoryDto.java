@@ -1,7 +1,7 @@
-package com.group.libraryapp.presentation.dto.user.response;
+package com.group.libraryapp.presentation.controller.user.response;
 
 import com.group.libraryapp.domain.model.book.UserBuyHistory;
-import com.group.libraryapp.presentation.dto.book.response.BookSummaryDto;
+import com.group.libraryapp.presentation.controller.book.response.BookSummaryDto;
 import lombok.Builder;
 import lombok.Getter;
 

@@ -1,4 +1,4 @@
-package com.group.libraryapp.presentation.dto.book.request;
+package com.group.libraryapp.presentation.controller.book.request;
 
 import com.group.libraryapp.core.type.BookCategory;
 import lombok.Getter;

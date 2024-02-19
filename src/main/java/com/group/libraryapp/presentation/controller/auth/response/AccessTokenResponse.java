@@ -1,4 +1,4 @@
-package com.group.libraryapp.presentation.dto.auth.response;
+package com.group.libraryapp.presentation.controller.auth.response;
 
 import lombok.Builder;
 import lombok.Getter;

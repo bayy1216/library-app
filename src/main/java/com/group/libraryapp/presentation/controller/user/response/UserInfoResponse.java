@@ -1,4 +1,4 @@
-package com.group.libraryapp.presentation.dto.user.response;
+package com.group.libraryapp.presentation.controller.user.response;
 
 import com.group.libraryapp.domain.model.user.User;
 import lombok.Builder;

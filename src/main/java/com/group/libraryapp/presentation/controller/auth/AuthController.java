@@ -4,8 +4,8 @@ import com.group.libraryapp.presentation.interceptor.annotation.JwtFilterExclusi
 import com.group.libraryapp.core.jwt.JwtToken;
 import com.group.libraryapp.core.jwt.JwtUtils;
 import com.group.libraryapp.domain.service.auth.AuthService;
-import com.group.libraryapp.presentation.dto.auth.response.AccessTokenResponse;
-import com.group.libraryapp.presentation.dto.auth.response.TokenResponse;
+import com.group.libraryapp.presentation.controller.auth.response.AccessTokenResponse;
+import com.group.libraryapp.presentation.controller.auth.response.TokenResponse;
 import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

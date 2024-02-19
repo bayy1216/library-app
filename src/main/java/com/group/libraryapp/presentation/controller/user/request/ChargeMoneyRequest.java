@@ -1,4 +1,4 @@
-package com.group.libraryapp.presentation.dto.user.request;
+package com.group.libraryapp.presentation.controller.user.request;
 
 import lombok.Getter;
 
