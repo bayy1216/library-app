@@ -19,6 +19,20 @@ jwt:
   secret: "b9ba6041-9927-4bf8-9bfa-fdaf95ae5a9b"
   access-token-expire-time: 1800000
   refresh-token-expire-time: 2592000000
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local, dev, prod
+  datasource:
+    driver-class-name:
+jwt:
+  secret: ${JWT_SECRET:b9ba6041-9927-4bf8-9bfa-fdaf95ae5a9b}
+  access-token-expire-time: 1800000 # 30 minutes
+  refresh-token-expire-time: 2592000000 # 30 days
+
+
 ---
 spring:
   config:
@@ -45,11 +59,6 @@ logging:
       hibernate:
         SQL: debug
         type: trace
-
-jwt:
-  secret: "b9ba6041-9927-4bf8-9bfa-fdaf95ae5a9b"
-  access-token-expire-time: 900000 # 15 minutes
-  refresh-token-expire-time: 1800000 # 30 minutes
 ---
 spring:
   config:
@@ -68,11 +77,6 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
 
-
-jwt:
-  secret: "b9ba6041-9927-4bf8-9bfa-fdaf95ae5a9b"
-  access-token-expire-time: 1800000 # 30 minutes
-  refresh-token-expire-time: 2592000000 # 30 days
 ---
 spring:
   config:
@@ -90,9 +94,3 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
-
-
-jwt:
-  secret: ${JWT_SECRET:b9ba6041-9927-4bf8-9bfa-fdaf95ae5a9b}
-  access-token-expire-time: 1800000 # 30 minutes
-  refresh-token-expire-time: 2592000000 # 30 days
